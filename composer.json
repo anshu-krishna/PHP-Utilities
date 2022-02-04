@@ -1,0 +1,21 @@
+{
+    "name": "anshu-krishna/utilities",
+    "description": "A collection of useful PHP classes",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anshu Krishna",
+            "email": "anshu.krishna5@gmail.com"
+        }
+    ],
+    "version": "1.0",
+    "require": {
+        "php": ">=8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Krishna\\Utilities\\": "src"
+        }
+    }
+}
