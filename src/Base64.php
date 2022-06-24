@@ -1,7 +1,7 @@
 <?php
 namespace Krishna\Utilities;
 
-final class Base64 {
+class Base64 {
 	use StaticOnlyTrait;
 	public static function encode(string $str) : string {
 		return rtrim(strtr(base64_encode($str), '+/', '-_'), '=');
@@ -20,10 +20,10 @@ final class Base64 {
 		return null;
 	}
 	public static function encode_json($value) : string {
-		return self::encode(JSON::encode($value));
+		return static::encode(JSON::encode($value));
 	}
 	public static function decode_json(string $str) { // Returns null on error
-		if(($str = self::decode($str)) === null) {
+		if(($str = static::decode($str)) === null) {
 			return null;
 		}
 		return JSON::decode($str);

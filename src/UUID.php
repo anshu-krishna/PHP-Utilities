@@ -1,7 +1,7 @@
 <?php
 namespace Krishna\Utilities;
 
-final class UUID {
+class UUID {
 	use StaticOnlyTrait;
 
 	public static function gen(bool $use_com = false) {
