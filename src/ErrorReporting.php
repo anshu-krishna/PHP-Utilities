@@ -12,7 +12,7 @@ class ErrorReporting {
 		echo
 			'<pre><strong style="color:red;font-size:1.2em;">Error:</strong> ',
 			JSON::encode($value, true, true),
-			' </pre>';
+			'</pre>';
 	}
 
 	private static function compact_trace_item(array $item) {
