@@ -19,6 +19,8 @@ class ErrorReporting {
 		$item['type'] ??= '';
 		$item['class'] ??= '';
 		$item['function'] ??= '';
+		$item['file'] ??= 'Unknown';
+		$item['line'] ??= 'Unknown';
 		$func = "{$item['class']}{$item['type']}{$item['function']}";
 		$ret = [
 			'at' => "File: {$item['file']}; Line: {$item['line']}"
