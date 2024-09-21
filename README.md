@@ -13,3 +13,4 @@ composer require anshu-krishna/php-utilities
  - **Static Only Trait**: This trait forces a PHP class to only work in `static` mode.
  - **Debugger**: Trace; Dump;
  - **ErrorReporting**: Sets common handler for unhandled/uncatched Error/Exception;
+ - **REST/Fetcher**: Fetch data from REST API;
