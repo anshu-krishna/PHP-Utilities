@@ -62,7 +62,17 @@ class Fetcher {
 			}
 		}
 
-		$this->headers['Accept-Encoding'] = 'gzip, deflate, identity';
+		if(
+			extension_loaded('zlib')
+			&& isset($_SERVER['HTTP_ACCEPT_ENCODING'])
+			&& substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')
+			&& (ini_get('output_handler') != 'ob_gzhandler')
+		) {
+			$this->headers['Accept-Encoding'] = 'gzip, deflate, identity';
+		} else {
+			$this->headers['Accept-Encoding'] = 'identity';
+		}
+
 		$this->headers['Connection'] = 'close';
 	}
 
