@@ -212,17 +212,6 @@ class Fetcher {
                 }
             }
         }
-		
-		// return new FetchResult(
-		// 	response: $response,
-		// 	uri: $uri,
-		// 	data: $data,
-		// 	headers: [
-		// 		'req' => $headers->toArray(),
-		// 		'res' => $http_response_header
-		// 	],
-		// 	error: $error,
-		// );
 
 		return new FetchResult(
 			url: $uri,

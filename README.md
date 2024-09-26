@@ -8,9 +8,15 @@ A collection of useful PHP classes.
 composer require anshu-krishna/php-utilities
 ```
 ## Libraries:
- - **Base64**: Encode base64; Decode base64; Encode base64-json; Decode base64-json;
- - **JSON**: Encode json; Decode json;
- - **Static Only Trait**: This trait forces a PHP class to only work in `static` mode.
- - **Debugger**: Trace; Dump;
- - **ErrorReporting**: Sets common handler for unhandled/uncatched Error/Exception;
- - **REST/Fetcher**: Fetch data from REST API;
+
+- **Base64**: Encode base64; Decode base64; Encode base64-json; Decode base64-json; [Read More](./docs/Base64.md)
+
+- **JSON**: Encode json; Decode json; [Read More](./docs/JSON.md)
+
+- **Static Only Trait**: This trait forces a PHP class to only work in `static` mode. [Read More](./docs/StaticOnlyTrait.md)
+
+- **Debugger**: Trace; Dump;
+
+- **ErrorReporting**: Sets common handler for unhandled/uncatched Error/Exception;
+
+- **REST/Fetcher**: Fetch data from REST API; [Read More](./docs/Rest-Fetcher.md)
