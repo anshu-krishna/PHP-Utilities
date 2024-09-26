@@ -20,32 +20,37 @@ class NestedAssoc implements \ArrayAccess, \IteratorAggregate, \Countable, \Json
 		$this->data = $data;
 	}
 
-	private function keyChain(mixed $path, bool $create = false) : array {
+	private function keyChain(
+		mixed $path,
+		array &$deepArray,
+		bool $create = false
+	) : bool {
 		$keys = explode('.', (string) $path);
 		$lastKey = array_pop($keys);
-		$deepArray = &$this->data;
+		
 		foreach ($keys as $key) {
 			if (!array_key_exists($key, $deepArray)) {
 				if ($create) {
 					$deepArray[$key] = [];
 				} else {
-					return [&$deepArray, false];
+					return false;
 				}
 			}
 			$deepArray = &$deepArray[$key];
 		}
-		return [&$deepArray, $lastKey];
+
+		return $lastKey;
 	}
 
 	// Functions for ArrayAccess
 	public function offsetExists(mixed $offset): bool {
-		$ret = $this->keyChain($offset);
-		$deepArray = &$ret[0];
-		$lastKey = $ret[1];
+		$deepArray = &$this->data;
+		$lastKey = $this->keyChain($offset, $deepArray);
 		return $lastKey !== false && array_key_exists($lastKey, $deepArray);
 	}
 	public function offsetGet(mixed $offset): mixed {
-		[&$deepArray, $lastKey] = $this->keyChain($offset);
+		$deepArray = &$this->data;
+		$lastKey = $this->keyChain($offset, $deepArray);
 		if($lastKey === false) {
 			return null;
 		}
@@ -55,11 +60,13 @@ class NestedAssoc implements \ArrayAccess, \IteratorAggregate, \Countable, \Json
 		return null;
 	}
 	public function offsetSet(mixed $offset, mixed $value): void {
-		[&$deepArray, $lastKey] = $this->keyChain($offset, true);
+		$deepArray = &$this->data;
+		$lastKey = $this->keyChain($offset, $deepArray, true);
 		$deepArray[$lastKey] = $value instanceof self ? $value->data : $value;
 	}
 	public function offsetUnset(mixed $offset): void {
-		[&$deepArray, $lastKey] = $this->keyChain($offset);
+		$deepArray = &$this->data;
+		$lastKey = $this->keyChain($offset, $deepArray);
 		if ($lastKey !== false) {
 			unset($deepArray[$lastKey]);
 		}
