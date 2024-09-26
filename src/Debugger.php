@@ -68,7 +68,7 @@ class Debugger {
 		if(is_callable(static::$dumpper_callback)) {
 			(static::$dumpper_callback)($trace);
 		} elseif(static::$use_default_dumpper_callback) {
-			static::echo($trace);
+			static::echo_print_r($trace);
 		}
 		
 		return $trace;
@@ -79,5 +79,11 @@ class Debugger {
 			'<pre><strong style="color:blue;font-size:1.2em;">Debug:</strong> ',
 			JSON::encode($data, true, true),
 			'</pre>';
+	}
+
+	public static function echo_print_r(array $data) {
+		echo '<pre><strong style="color:blue;font-size:1.2em;">Debug:</strong> ';
+		print_r($data);
+		echo '</pre>';
 	}
 }
