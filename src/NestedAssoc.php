@@ -29,7 +29,7 @@ class NestedAssoc implements \ArrayAccess, \IteratorAggregate, \Countable, \Json
 				if ($create) {
 					$deepArray[$key] = [];
 				} else {
-					return [$deepArray, false];
+					return [&$deepArray, false];
 				}
 			}
 			$deepArray = &$deepArray[$key];
@@ -39,7 +39,9 @@ class NestedAssoc implements \ArrayAccess, \IteratorAggregate, \Countable, \Json
 
 	// Functions for ArrayAccess
 	public function offsetExists(mixed $offset): bool {
-		[$deepArray, $lastKey] = $this->keyChain($offset);
+		$ret = $this->keyChain($offset);
+		$deepArray = &$ret[0];
+		$lastKey = $ret[1];
 		return $lastKey !== false && array_key_exists($lastKey, $deepArray);
 	}
 	public function offsetGet(mixed $offset): mixed {
