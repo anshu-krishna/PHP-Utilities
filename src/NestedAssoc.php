@@ -34,7 +34,7 @@ class NestedAssoc implements \ArrayAccess, \IteratorAggregate, \Countable, \Json
 			}
 			$deepArray = &$deepArray[$key];
 		}
-		return [$deepArray, $lastKey];
+		return [&$deepArray, $lastKey];
 	}
 
 	// Functions for ArrayAccess
@@ -87,6 +87,10 @@ class NestedAssoc implements \ArrayAccess, \IteratorAggregate, \Countable, \Json
 
 	// Custom function to count all keys
 	public function countItems() : int {
-		return iterator_count(self::keysList($this->data));
+		$count = 0;
+		foreach(self::keysList($this->data) as $key) {
+			$count++;
+		}
+		return $count;
 	}
 }
