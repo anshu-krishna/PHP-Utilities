@@ -79,7 +79,7 @@ class ErrorReporting {
 				trace: static::$dump_trace ? debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) : null
 			);
 			error_clear_last();
-		}, E_ALL | E_STRICT);
+		}, E_ALL);
 		\set_exception_handler(function(\Throwable $exception) {
 			$class = get_class($exception);
 			static::execute_callback(
